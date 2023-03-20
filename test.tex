@@ -1,0 +1,53 @@
+
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+Consider the function $f(x) = x^3 - 2x - 5$ and its derivative $f'(x) = 3x^2 - 2$.
+
+Let $x_0 = 1$ be the initial guess for the root of $f(x)$.
+
+The Newton-Raphson method is used to find the root of the function. The algorithm iteratively updates the value of $x_0$ using the following equation:
+
+$$ x_1 = x_0 - \frac{f(x_0)}{f'(x_0)} $$
+
+If the absolute value of $f(x_1)$ is less than the tolerance level, then the algorithm terminates and the root is found.
+
+Otherwise, the value of $x_0$ is updated to $x_1$ and the process continues.
+
+Python code's implementation of Newton-Raphson method 
+
+\begin{verbatim}
+import timeit
+
+def f(x):
+    return x**3 - 2*x - 5
+
+def df(x):
+    return 3*x**2 - 2
+
+x0 = 1
+tolerance = 1e-6
+max_iteration = 100
+
+for i in range(max_iteration):
+    fx = f(x0)
+    dfx = df(x0)
+    
+    x1 = x0 - (fx / dfx)
+    print(f"Iteration number:{i+1}")
+    
+    if abs(f(x1)) < tolerance:
+        print(f"Root found at x = {x1:.2f}")
+        print("Time taken is ", timeit.timeit())
+        break
+    else:
+        x0 = x1
+\end{verbatim}
+
+The output of the Python code is printed to the console
+
+This includes the iteration number, the root found, and the time taken to find the root.
+
+\end{document}
