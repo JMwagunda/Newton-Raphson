@@ -4,7 +4,9 @@
 
 \begin{document}
 
-Consider the function $f(x) = x^3 - 2x - 5$ and its derivative $f'(x) = 3x^2 - 2$.
+In order to determine the function's root within a given tolerance and the maximum number of iterations, this function uses the Newton-Raphson approach. Initial guess x0, tolerance, and maximum iterations are provided as inputs. If the root cannot be located within the provided number of iterations, the function emits an error message instead of the root when it is discovered. Moreover, the function needs the derivative, which is represented by the symbol df (x).\\
+
+Consider the function $f(x) = 2x^3 - 3^x - 12x$ and its derivative $f'(x) = 6x^2 - 6x - 12$.
 
 Let $x_0 = 1$ be the initial guess for the root of $f(x)$.
 
@@ -22,10 +24,10 @@ Python code's implementation of Newton-Raphson method
 import timeit
 
 def f(x):
-    return x**3 - 2*x - 5
+    return 2*x**3 - 3**x - 12*x
 
 def df(x):
-    return 3*x**2 - 2
+    return 6*x**2 - 6*x-12
 
 x0 = 1
 tolerance = 1e-6
@@ -36,7 +38,8 @@ for i in range(max_iteration):
     dfx = df(x0)
     
     x1 = x0 - (fx / dfx)
-    print(f"Iteration number:{i+1}")
+    print("Iterations " + str(i) + ": x = " + str(x0) + " f(x) = " +    
+          str(f(x0)))
     
     if abs(f(x1)) < tolerance:
         print(f"Root found at x = {x1:.2f}")

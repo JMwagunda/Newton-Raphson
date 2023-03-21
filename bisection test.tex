@@ -1,0 +1,50 @@
+
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section*{Bisection Method for Finding Roots}
+
+Within a given tolerance and maximum number of iterations, this function employs the bisection method to locate the function's root. The root's location is in the range $[a, b]$. The tolerance and the maximum number of iterations are specified in the function.
+We start by defining a function $f(x)$ and its derivative $f'(x)$, as well as an initial guess for the root:
+
+
+Consider a function $f(x)$ that is continuous on the interval $[a,b]$ and let $f(a)$ and $f(b)$ have opposite signs, i.e., $f(a) \cdot f(b) < 0$. Then, by the Intermediate Value Theorem, there exists at least one root of $f(x)$ in the interval $[a,b]$.
+
+The bisection method is a simple numerical algorithm for finding this root. It works by repeatedly dividing the interval $[a,b]$ in half and testing which half contains the root, until a sufficiently accurate estimate of the root is found. Specifically, the bisection method involves the following iterative equation for updating the guesses for the root:
+
+\begin{equation*}
+    c_k = \frac{a_k + b_k}{2}
+\end{equation*}
+
+where $c_k$ is the midpoint of the interval $[a_k, b_k]$. At each iteration $k$, the function $f(x)$ is evaluated at $c_k$, and the sign of $f(c_k)$ is used to determine which half of the interval contains the root. The interval is then updated accordingly, and the process is repeated until the desired level of accuracy is achieved.
+
+Here's an implementation of the bisection method in Python:
+
+\begin{verbatim}
+def f(x):
+    return 2*x**3 - 3**x - 12*x
+
+a = 2
+b = -1
+tolerance = 1e-6
+max_iterations = 100
+    
+for i in range(max_iterations):
+    c = (a + b) / 2
+    print(f"Iteration number is: {i}")
+    
+    if abs(f(c)) < tolerance:
+        print(f"Root found at x = {c:6f}")
+        print("Time taken is: ", timeit.timeit())
+        break
+    elif f(c) * f(a) < 0:
+        b = c
+    else:
+        a = c
+\end{verbatim}
+
+In this code, we define the function $f(x)$ and the initial guesses for the root, $a$ and $b$. We also set the tolerance and maximum number of iterations. The main loop then implements the bisection method by updating the interval $[a,b]$ using the midpoint $c$, and testing the sign of $f(c)$ to determine which half of the interval contains the root. The process continues until a root within the specified tolerance is found, or the maximum number of iterations is reached.
+
+\end{document}
